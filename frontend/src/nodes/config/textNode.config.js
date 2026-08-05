@@ -12,6 +12,7 @@ const TEXT_NODE_HANDLES = [{ name: 'output', type: 'source', position: Position.
 export const textNodeConfig = {
   type: 'text',
   title: 'Text',
+  icon: 'type',
   fields: [
     {
       key: 'text',

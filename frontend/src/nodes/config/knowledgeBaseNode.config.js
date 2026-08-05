@@ -9,6 +9,7 @@ import { Position } from 'reactflow';
 export const knowledgeBaseNodeConfig = {
   type: 'knowledgeBase',
   title: 'Knowledge Base',
+  icon: 'bookOpen',
   fields: [
     {
       key: 'knowledgeBase',

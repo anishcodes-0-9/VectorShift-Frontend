@@ -11,6 +11,7 @@ import { Position } from 'reactflow';
 export const customApiRequestNodeConfig = {
   type: 'customApiRequest',
   title: 'Custom API Request',
+  icon: 'code',
   fields: [
     {
       key: 'method',

@@ -1,0 +1,57 @@
+/* BaseNode.css
+   Styling for the shared node-card shell. Height is intrinsic (per
+   docs/NODECONFIG-API.md §2's own note that a fixed height is a latent
+   overflow bug) — the card grows to fit whatever header/description/fields a
+   given config supplies. */
+
+.node-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  transition: border-color var(--duration-fast) var(--ease-ui);
+}
+
+/* ReactFlow adds `selected` to the node's wrapper element, not to this card,
+   so the selected state is expressed as a descendant selector rather than a
+   prop threaded through BaseNode. Border-only, per DESIGN-AUDIT.md §5/§9 —
+   no drop shadow, ever. */
+.react-flow__node.selected .node-card {
+  border-color: var(--color-ink);
+}
+
+.node-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.node-card__icon {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.node-card__title {
+  font-size: var(--text-base);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+}
+
+.node-card__description {
+  padding: var(--space-2) var(--space-3) 0;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.node-card__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3);
+}

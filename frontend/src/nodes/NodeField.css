@@ -1,0 +1,57 @@
+/* NodeField.css
+   One shared control style for input/select/textarea, per DESIGN-AUDIT.md §8
+   (verbatim: white surface, rule-dk border, ink focus border + focus ring). */
+
+.node-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.node-field__label {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-muted);
+}
+
+.node-field__control {
+  width: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule-dk);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--color-ink);
+  transition: border-color var(--duration-fast) var(--ease-ui),
+    box-shadow var(--duration-fast) var(--ease-ui);
+}
+
+.node-field__control:hover {
+  border-color: var(--color-ink-soft);
+}
+
+.node-field__control:focus-visible {
+  outline: none;
+  border-color: var(--color-ink);
+  box-shadow: var(--shadow-focus);
+}
+
+.node-field__control:disabled {
+  background: var(--color-bg-alt);
+  color: var(--color-dim);
+  cursor: not-allowed;
+}
+
+/* Headers on the Custom API Request node are the one textarea field in this
+   assessment and hold technical content (raw header lines) — mono per
+   DESIGN-AUDIT.md §3's typography rule ("anything technical"). Plain text
+   fields elsewhere stay on the sans stack. */
+.node-field__control--textarea {
+  resize: vertical;
+  min-height: 56px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}

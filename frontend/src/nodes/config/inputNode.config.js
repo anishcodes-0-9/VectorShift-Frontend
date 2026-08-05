@@ -7,6 +7,7 @@ import { Position } from 'reactflow';
 export const inputNodeConfig = {
   type: 'customInput',
   title: 'Input',
+  icon: 'logIn',
   fields: [
     {
       key: 'inputName',

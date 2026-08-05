@@ -1,0 +1,77 @@
+/* ui.css
+   Re-themes ReactFlow's default chrome (handles, edges, controls, minimap) to
+   the ink/paper palette. Scoped under .pipeline-canvas so it never leaks into
+   any node card's own styling — node-card colors live in nodes/BaseNode.css. */
+
+.pipeline-canvas {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: var(--color-bg);
+}
+
+.pipeline-canvas .react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-ink);
+  transition: background var(--duration-base) var(--ease-ui),
+    border-color var(--duration-base) var(--ease-ui);
+}
+
+.pipeline-canvas .react-flow__handle:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.pipeline-canvas .react-flow__edge-path {
+  stroke: var(--color-rule-dk);
+  stroke-width: 1.5;
+}
+
+.pipeline-canvas .react-flow__edge:hover .react-flow__edge-path,
+.pipeline-canvas .react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--color-ink);
+}
+
+.pipeline-canvas .react-flow__connection-path {
+  stroke: var(--color-accent);
+}
+
+/* Keyboard-selected nodes (Tab-focusable per ReactFlow's own a11y support)
+   get the same ink border as a mouse-selected node, plus a focus ring —
+   DESIGN-AUDIT.md §14's "visible keyboard focus" requirement. */
+.pipeline-canvas .react-flow__node:focus-visible {
+  outline: none;
+}
+
+.pipeline-canvas .react-flow__node:focus-visible .node-card {
+  border-color: var(--color-ink);
+  box-shadow: var(--shadow-focus);
+}
+
+.pipeline-canvas .react-flow__controls {
+  box-shadow: none;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.pipeline-canvas .react-flow__controls-button {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-rule);
+  transition: background var(--duration-base) var(--ease-ui);
+}
+
+.pipeline-canvas .react-flow__controls-button:hover {
+  background: var(--color-accent-soft);
+}
+
+.pipeline-canvas .react-flow__controls-button svg {
+  fill: var(--color-ink);
+}
+
+.pipeline-canvas .react-flow__minimap {
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-sm);
+}

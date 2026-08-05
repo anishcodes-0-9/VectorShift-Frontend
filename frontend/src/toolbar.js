@@ -1,15 +1,16 @@
 // toolbar.js
 
+import './toolbar.css';
 import { DraggableNode } from './draggableNode';
 import { nodeConfigs } from './nodes/config';
 
 export const PipelineToolbar = () => {
-
     return (
-        <div style={{ padding: '10px' }}>
-            <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+        <div className="toolbar">
+            <span className="toolbar__label">Add a node</span>
+            <div className="toolbar__chips">
                 {nodeConfigs.map((config) => (
-                    <DraggableNode key={config.type} type={config.type} label={config.title} />
+                    <DraggableNode key={config.type} type={config.type} label={config.title} icon={config.icon} />
                 ))}
             </div>
         </div>

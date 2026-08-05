@@ -8,6 +8,7 @@ import { Position } from 'reactflow';
 export const urlLoaderNodeConfig = {
   type: 'urlLoader',
   title: 'URL Loader',
+  icon: 'globe',
   fields: [
     {
       key: 'url',

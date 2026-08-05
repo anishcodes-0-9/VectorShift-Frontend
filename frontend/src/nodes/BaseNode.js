@@ -3,13 +3,11 @@
 // (container, header) and orchestration (resolving config against data, wiring
 // field changes to the store) — no per-node-type business logic.
 
+import './BaseNode.css';
 import { useStore } from '../store';
 import { NodeHandles } from './NodeHandles';
 import { NodeField } from './NodeField';
-
-// The 4 existing nodes each hardcoded this same inline style; centralized here
-// per the blueprint's styling standard instead of repeating it per node.
-const CONTAINER_STYLE = { width: 200, height: 80, border: '1px solid black' };
+import { nodeIcons } from './nodeIcons';
 
 const resolveFieldValue = (field, data, id) => {
   if (data && data[field.key] !== undefined) {
@@ -39,27 +37,32 @@ export const BaseNode = ({ id, data, config }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
 
   const handles = typeof config.handles === 'function' ? config.handles(data) : config.handles;
+  const Icon = config.icon ? nodeIcons[config.icon] : null;
 
   const handleFieldChange = (key, value) => {
     updateNodeField(id, key, value);
   };
 
   return (
-    <div style={CONTAINER_STYLE}>
-      <div>
-        {config.icon ? <span>{config.icon}</span> : null}
-        <span>{config.title}</span>
+    <div className="node-card">
+      <div className="node-card__header">
+        {Icon ? <Icon className="node-card__icon" size={15} strokeWidth={1.75} aria-hidden="true" /> : null}
+        <span className="node-card__title">{config.title}</span>
       </div>
-      {config.description ? <div>{config.description}</div> : null}
-      {config.fields.map((field) => (
-        <NodeField
-          key={field.key}
-          id={id}
-          field={field}
-          value={resolveFieldValue(field, data, id)}
-          onChange={handleFieldChange}
-        />
-      ))}
+      {config.description ? <div className="node-card__description">{config.description}</div> : null}
+      {config.fields.length ? (
+        <div className="node-card__fields">
+          {config.fields.map((field) => (
+            <NodeField
+              key={field.key}
+              id={id}
+              field={field}
+              value={resolveFieldValue(field, data, id)}
+              onChange={handleFieldChange}
+            />
+          ))}
+        </div>
+      ) : null}
       <NodeHandles id={id} handles={handles} />
     </div>
   );

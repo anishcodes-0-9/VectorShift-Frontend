@@ -9,6 +9,7 @@ import { Position } from 'reactflow';
 export const llmNodeConfig = {
   type: 'llm',
   title: 'LLM',
+  icon: 'sparkles',
   description: 'This is a LLM.',
   fields: [],
   handles: [

@@ -8,6 +8,7 @@ import { Position } from 'reactflow';
 export const outputNodeConfig = {
   type: 'customOutput',
   title: 'Output',
+  icon: 'logOut',
   fields: [
     {
       key: 'outputName',

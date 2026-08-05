@@ -9,6 +9,12 @@ import { shallow } from 'zustand/shallow';
 import { nodeTypes } from './nodes/config';
 
 import 'reactflow/dist/style.css';
+import './ui.css';
+
+// Mirrors the --color-rule token. Passed directly to Background's `color`
+// prop rather than a CSS var — this is a component prop consumed in JS, not
+// a stylesheet rule, so a var() reference wouldn't resolve here.
+const CANVAS_GRID_COLOR = '#D9D3C5';
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
@@ -81,7 +87,7 @@ export const PipelineUI = () => {
 
     return (
         <>
-        <div ref={reactFlowWrapper} style={{width: '100wv', height: '70vh'}}>
+        <div ref={reactFlowWrapper} className="pipeline-canvas">
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -96,7 +102,7 @@ export const PipelineUI = () => {
                 snapGrid={[gridSize, gridSize]}
                 connectionLineType='smoothstep'
             >
-                <Background color="#aaa" gap={gridSize} />
+                <Background color={CANVAS_GRID_COLOR} gap={gridSize} />
                 <Controls />
                 <MiniMap />
             </ReactFlow>

@@ -1,0 +1,23 @@
+/* toolbar.css */
+
+.toolbar {
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.toolbar__label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-muted);
+}
+
+.toolbar__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}

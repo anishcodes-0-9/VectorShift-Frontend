@@ -1,13 +1,95 @@
+/* index.css
+   Global design tokens and base reset for the VectorShift pipeline editor.
+   Token values are lifted verbatim from docs/DESIGN-AUDIT.md §3 (VectorShift's
+   real shipped tokens), not guessed. Every component stylesheet in this app
+   reads from these variables rather than hardcoding colors/spacing/radius. */
+
+:root {
+  /* Color */
+  --color-bg: #FFFEFB;
+  --color-bg-alt: #FCF9F0;
+  --color-paper: #FBF9F4;
+  --color-surface: #FFFFFF;
+  --color-ink: #0F131A;
+  --color-ink-soft: #20242C;
+  --color-muted: #54585F;
+  --color-dim: #8B867D;
+  --color-rule: #D9D3C5;
+  --color-rule-dk: #BFB7A4;
+  --color-accent: #5B4824;
+  --color-accent-soft: rgba(91, 72, 36, 0.08);
+  --color-accent-hi: #C5A562;
+  --color-danger: #C0392B;
+  --color-danger-soft: rgba(192, 57, 43, 0.08);
+
+  /* Typography */
+  --font-sans: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-serif: 'Newsreader', 'Times New Roman', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 14px;
+  --text-md: 15px;
+  --text-lg: 20px;
+  --tracking-tight: -0.02em;
+  --tracking-label: 0.14em;
+
+  /* Radius — sharp everywhere except circular affordances */
+  --radius-sm: 2px;
+  --radius-round: 50%;
+
+  /* Shadow — used only as a focus-accessibility signal, never for elevation */
+  --shadow-focus: 0 0 0 3px rgba(15, 19, 26, 0.08);
+  --shadow-focus-danger: 0 0 0 3px rgba(192, 57, 43, 0.08);
+
+  /* Spacing — 4px base unit */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Motion */
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-ui: cubic-bezier(0.4, 0, 0.4, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: var(--font-mono);
+}
+
+/* Explicit improvement over the source site (DESIGN-AUDIT.md §14): the real
+   VectorShift stylesheet has zero prefers-reduced-motion handling despite
+   heavy use of motion. Collapse every transition/animation to near-instant. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

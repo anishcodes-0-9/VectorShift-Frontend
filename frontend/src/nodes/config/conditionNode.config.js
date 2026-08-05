@@ -10,6 +10,7 @@ import { Position } from 'reactflow';
 export const conditionNodeConfig = {
   type: 'condition',
   title: 'Condition',
+  icon: 'gitBranch',
   fields: [
     {
       key: 'operator',

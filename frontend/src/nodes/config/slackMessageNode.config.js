@@ -8,6 +8,7 @@ import { Position } from 'reactflow';
 export const slackMessageNodeConfig = {
   type: 'slackMessage',
   title: 'Slack Message',
+  icon: 'messageSquare',
   fields: [
     {
       key: 'channel',
