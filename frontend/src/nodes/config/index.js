@@ -8,12 +8,22 @@ import { inputNodeConfig } from './inputNode.config';
 import { llmNodeConfig } from './llmNode.config';
 import { outputNodeConfig } from './outputNode.config';
 import { textNodeConfig } from './textNode.config';
+import { knowledgeBaseNodeConfig } from './knowledgeBaseNode.config';
+import { conditionNodeConfig } from './conditionNode.config';
+import { urlLoaderNodeConfig } from './urlLoaderNode.config';
+import { slackMessageNodeConfig } from './slackMessageNode.config';
+import { customApiRequestNodeConfig } from './customApiRequestNode.config';
 
 const registryEntries = [
   ['customInput', inputNodeConfig],
   ['llm', llmNodeConfig],
   ['customOutput', outputNodeConfig],
   ['text', textNodeConfig],
+  ['knowledgeBase', knowledgeBaseNodeConfig],
+  ['condition', conditionNodeConfig],
+  ['urlLoader', urlLoaderNodeConfig],
+  ['slackMessage', slackMessageNodeConfig],
+  ['customApiRequest', customApiRequestNodeConfig],
 ];
 
 registryEntries.forEach(([registryKey, config]) => {
