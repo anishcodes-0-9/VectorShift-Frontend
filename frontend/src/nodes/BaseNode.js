@@ -7,6 +7,10 @@ import { useStore } from '../store';
 import { NodeHandles } from './NodeHandles';
 import { NodeField } from './NodeField';
 
+// The 4 existing nodes each hardcoded this same inline style; centralized here
+// per the blueprint's styling standard instead of repeating it per node.
+const CONTAINER_STYLE = { width: 200, height: 80, border: '1px solid black' };
+
 const resolveFieldValue = (field, data, id) => {
   if (data && data[field.key] !== undefined) {
     return data[field.key];
@@ -41,7 +45,7 @@ export const BaseNode = ({ id, data, config }) => {
   };
 
   return (
-    <div>
+    <div style={CONTAINER_STYLE}>
       <div>
         {config.icon ? <span>{config.icon}</span> : null}
         <span>{config.title}</span>
