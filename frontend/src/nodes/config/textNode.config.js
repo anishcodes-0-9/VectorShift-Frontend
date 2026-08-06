@@ -1,13 +1,24 @@
 // textNode.config.js
-// Data-only definition of the Text node. `handles` is written in function form
-// to exercise the shape Part 3's dynamic {{variable}} handles will need, even
-// though it still only ever returns this one static handle today. The function
-// returns the same module-level array on every call so NodeHandles' internals-
-// refresh effect doesn't fire on every render.
+// Data-only definition of the Text node, plus the small pure helpers that turn
+// parsed {{variable}} names into HandleConfig entries. The dynamic, per-render
+// handle list itself is NOT computed here — that needs React-lifecycle-scoped
+// memoization (see ../TextNode.js) to stay referentially stable across
+// keystrokes that don't change the variable set, and this config object is a
+// shared singleton reused by every Text node instance, so it can't hold any
+// one instance's state. `handles` below is just a valid, self-consistent
+// fallback (the static output handle) for a NodeConfig used outside that
+// wrapper — the real render path always overrides it.
 
 import { Position } from 'reactflow';
 
-const TEXT_NODE_HANDLES = [{ name: 'output', type: 'source', position: Position.Right }];
+export const DEFAULT_TEXT = '{{input}}';
+
+const OUTPUT_HANDLE = { name: 'output', type: 'source', position: Position.Right };
+
+export const buildTextHandles = (variableNames) => [
+  ...variableNames.map((name) => ({ name, type: 'target' })),
+  OUTPUT_HANDLE,
+];
 
 export const textNodeConfig = {
   type: 'text',
@@ -18,8 +29,8 @@ export const textNodeConfig = {
       key: 'text',
       label: 'Text:',
       type: 'text',
-      defaultValue: '{{input}}',
+      defaultValue: DEFAULT_TEXT,
     },
   ],
-  handles: () => TEXT_NODE_HANDLES,
+  handles: buildTextHandles([]),
 };
